@@ -6,4 +6,16 @@ post_downsample_filt = human_filt110all(post_downsample);
 
 pre_pre_cohere = human_coheres(pre_downsample_filt, pre_downsample_filt, 1, 10, 1, 1);
 post_post_cohere = human_coheres(post_downsample_filt, post_downsample_filt, 1, 10, 1, 1);
-pre_post_cohere = human_coheres(pre_downsample_filt, post_downsample_filt, 1, 10, 1, 0);
+
+subplot(2,1,1)
+f = heatmap(pre_pre_cohere);
+>> title('Coherence of Pre-Stim Channels')
+subplot(2,1,2)
+>> xlabel('Channel')
+>> ylabel('Channel')
+>> caxis(f,[.3 1]);
+f2 = heatmap(post_post_cohere);
+>> title('Coherence of Post-Stim Channels')
+>> caxis(f2,[.3 1]);
+>> xlabel('Channel')
+>> ylabel('Channel')
