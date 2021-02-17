@@ -1,0 +1,9 @@
+pre_downsample = human_downsample(pre_epoched_dat);
+post_downsample = human_downsample(post_epoched_dat);
+
+pre_downsample_filt = human_filt110all(pre_downsample);
+post_downsample_filt = human_filt110all(post_downsample);
+
+pre_pre_cohere = human_coheres(pre_downsample_filt, pre_downsample_filt, 1, 10, 1, 1);
+post_post_cohere = human_coheres(post_downsample_filt, post_downsample_filt, 1, 10, 1, 1);
+pre_post_cohere = human_coheres(pre_downsample_filt, post_downsample_filt, 1, 10, 1, 0);
