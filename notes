@@ -19,3 +19,32 @@ f2 = heatmap(post_post_cohere);
 >> caxis(f2,[.3 1]);
 >> xlabel('Channel')
 >> ylabel('Channel')
+
+
+pre_pre_cohere_shuff = human_coheres_shuff(pre_downsample_filt, pre_downsample_filt, 1, 10, 1, 1);
+post_post_cohere_shuff = human_coheres_shuff(post_downsample_filt, post_downsample_filt, 1, 10, 1, 1);
+
+
+pre_pre_cohere_far30 = human_coheres(pre_downsample_filt(:,1:60000), pre_downsample_filt(:,1:60000), 1, 10, 1, 10)
+post_post_cohere30_far30 = human_coheres(post_downsample_filt(:,296000:end), post_downsample_filt(:,296000:end), 1, 10, 1, 10)
+
+
+>> Fs = 2000;
+>> transforms = zeros(2549,1);
+>>     data = post_downsample_filt(9,178000:188000)';
+>>     avg = mean(data);
+>>     data = data - avg;
+>>     L = 5096;
+>>     Y = fft(data,L);
+>>     P2 = abs(Y/L);
+    P1 = P2(1:L/2+1);
+    P1(2:end-1) = 2*P1(2:end-1);
+>>     transforms = transforms + P1;
+>> freq = Fs*(0:(L/2))/L;
+>> avg_transform = [freq',transforms];
+>> plot(freq,transforms);
+>> axis([1 200, -40 40])
+>> axis([1 200, 0 30])
+>> ylabel('Power (au)')
+>> xlabel('Frequency')
+>> title('Power in different frequencies, Channel 9 post stim')
